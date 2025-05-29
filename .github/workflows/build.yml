@@ -1,46 +1,13 @@
-name: Publish example slides to GitHub Pages
+name: Build
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-permissions:
-  contents: read
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
-      - name: Convert Markdown into HTML and PDF
-        uses: ./
+      - uses: actions/setup-node@v4
         with:
-          config-file: ./.marprc.yml
-
-      - name: Uploade artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./output
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    permissions:
-      pages: write
-      id-token: write
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          node-version: '22'
+      - run: npx @marp-team/marp-cli@latest ./
