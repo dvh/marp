@@ -1,0 +1,31 @@
+/*!
+ * @theme don
+  */
+@import "default";
+
+section {
+  align-content: start !important;
+  background-image: url("header.svg");
+  background-repeat: no-repeat;
+}
+h2 {
+  padding-top: 10px;
+  padding-bottom: 0px;
+  color: #017bc6;
+}
+ol,
+ul {
+  padding-left: 1em !important;
+}
+li::marker {
+  color: #017bc6;
+}
+section.title {
+  background-color: #017bc6 !important;
+  color: #ffffff !important;
+  text-align: center;
+}
+section h1, section.title h2 {
+  padding-top: 200px;
+  color: #ffffff !important;
+}
