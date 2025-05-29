@@ -25,10 +25,10 @@ jobs:
         with:
           config-file: ./.marprc.yml
 
-      - name: Upload artifact
+      - name: Uploade artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./
+          path: ./output
 
   deploy:
     runs-on: ubuntu-latest
