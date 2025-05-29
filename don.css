@@ -23,9 +23,28 @@ li::marker {
 section.title {
   background-color: #017bc6 !important;
   color: #ffffff !important;
-  text-align: center;
+}
+section.title a {
+  color: #ffffff !important;
+  text-decoration: underline;
 }
 section h1, section.title h2 {
-  padding-top: 200px;
+  padding-top: 180px;
   color: #ffffff !important;
+  text-align: center;
+  font-size: 2em;
+}
+section img {
+  max-height: 500px;
+}
+section.image h2 {
+  display: none;
+}
+section.image {
+  background-image: none;
+  padding: 0 !important;
+  text-align: center;
+}
+section.image img {
+  max-height: 720px;
 }

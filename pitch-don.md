@@ -7,6 +7,13 @@ headingDivider: 2
 # developer.overheid.nl
 <!-- _class: title -->
 
+Dimitri van Hees
+<d.vanhees@geonovum.nl>
+
+## Organisatie
+
+![organisatie](./pitch-don/organisatie.png)
+
 ## Kernteam
 
 - Product Owner: Dimitri van Hees
@@ -30,11 +37,31 @@ headingDivider: 2
 - API register
 - Open Source Software (OSS) register
 
+## Homepage
+<!-- _class: image -->
+
+![homepage](./pitch-don/homepage.png)
+
+## Release early, release often
+<!-- _class: title -->
+
 ## Practice what you preach
 
 - Front-end op basis van NL Design System
 - Open Source
 - API first
+
+## Nieuwe features
+<!-- _class: title -->
+
+## Architectuur
+<!-- _class: image -->
+
+![architectuur](./pitch-don/architectuur.png)
+
+## Implementatieondersteuning API's
+
+![implementatieondersteuning](./pitch-don/implementatieondersteuning.png)
 
 ## Nieuwe ADR validator
 
@@ -56,6 +83,9 @@ headingDivider: 2
 - Toegankelijkheid
 - Slack en Github
 
+## API register
+<!-- _class: title -->
+
 ## Focus op REST
 
 - WMS/WFS -> OGC API = REST
@@ -73,7 +103,7 @@ headingDivider: 2
 - Example(s) tbv mocking services en SDK’s
 - JSON schemas (vanaf 3.1)
 
-## Nieuwe features
+## Nieuwe features API register
 
 - Nieuwe aanleverprocedure ism Logius
 - API lifecycle informatie; actuele versie, deprecation, uptime
@@ -83,33 +113,134 @@ headingDivider: 2
 - Verbeterde contactinformatie
 - Embedded Discourse comments
 
-## Schema
+## Nieuwe aanleverprocedure
+
+- POST met OAS locatie
+- Wij checken dagelijks of er iets gewijzigd is (PUT om te forceren)
+- Validator draait indien een API nieuw of gewijzigd is
+- Feedback wordt teruggekoppeld naar contactinfo
+- DELETE niet mogelijk; dit is een wijziging in lifecycle status
+
+## TBD
+
+- `servers` en `contact` optioneel meesturen
+- Lifecycle info: <https://github.com/Geonovum/KP-APIs/issues/649>
+- Aansluiten organisaties
+
+## Ondersteuning upgrade OpenAPI 3.0 naar 3.1
+
+- OpenAPI 3.1 is niet 100% backwards compatible
+- Impactanalyse op basis van API register
+- Linter “inversen”; kijken wat er breakt bij een upgrade
+- Migratietutorial/tools
+
+## Schema register
+<!-- _class: title -->
+
+## DVLA-1
+<!-- _class: image -->
+![dvla-1](./pitch-don/dvla.png)
+
+## DVLA-2
+<!-- _class: image -->
+![dvla-2](./pitch-don/dvla2.png)
+
+## schemas.developer.overheid.nl
+
+- CORS policy
+- Versiebeheer
+- Zoeken
+- API design; hergebruik en goede examples in docs
+
+## openapi.yaml
+
+```yaml
+/apis/{id}:
+  parameters:
+    - $ref: "#/components/parameters/id"
+  get:
+    responses:
+      "200":
+        content:
+          application/json:
+            schema:
+              $ref: "https://schemas.developer.overheid.nl/api.json"
+```
+
+## https:\/\/schemas.developer.overheid.nl/api.json
 
 ```json
 {
-  "$id": "https://example.com/person.schema.json",
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Person",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "firstName": {
-      "type": "string",
-      "description": "The person's first name."
+      "titel": {
+          "type": "string"
+      },
+      "organisatie": {
+        "type": "object",
+        "properties": {
+          "$ref": "https://schemas.standaarden.overheid.nl/tooi/organisatie.json"
+        }
+      }
+  },
+  "required": [
+    "titel",
+    "organisatie"
+  ]
+}
+```
+
+## https:\/\/schemas.standaarden.overheid.nl/tooi/organisatie.json
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "officieleNaam": {
+      "type": "string"
     },
-    "lastName": {
-      "type": "string",
-      "description": "The person's last name."
+    "verkorteNaam": {
+      "type": "string"
     },
-    "age": {
-      "description": "Age in years which must be equal to or greater than zero.",
-      "type": "integer",
-      "minimum": 0
+    "uri": {
+      "type": "string"
     },
-    "age": {
-      "description": "Age in years which must be equal to or greater than zero.",
-      "type": "integer",
-      "minimum": 0
+    "adres": {
+      "type": "object",
+      "$ref": "https://schemas.developer.overheid.nl/adres.json" // enz.
     }
   }
 }
 ```
+
+## Overige features
+<!-- _class: title -->
+
+## Verbeteringen OSS Register
+
+- Samenwerking Frankrijk, Italië en Brussel
+- Publiccode.yaml
+- Don't reinvent the wheel!
+
+## Techradar
+<!-- _class: image -->
+![techradar](./pitch-don/techradar.png)
+
+## Help mee
+
+- Kennisbank artikelen
+- Interviews
+- Pull requests
+- Feature requests
+- Ideeën
+
+## Op naar één centrale plek voor software development bij de overheid!
+<!-- _class: title -->
+
+- Bijdragen: <https://developer.overheid.nl/contributing>
+- Mastodon: <https://social.overheid.nl/@developer>
+- Slack: <https://codefornl.slack.com/archives/CFV4B3XE2>
+- Github: <https://github.com/developer-overheid-nl>
+- E-mail: <developer.overheid@geonovum.nl>
